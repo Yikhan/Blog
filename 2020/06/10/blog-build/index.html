@@ -2,7 +2,7 @@
 yourname.github.io/blog/css/1.css
 
 实际访问:
-yourname.github.io/css/1.css</code></pre></div><p>其实Hexo文档里面已经提示过你了：</p><blockquote><p>URL<br>If your site is put in a subdirectory, set url as ‘<a href="http://yoursite.com/child&#39;">http://yoursite.com/child&#39;</a> and root as ‘/child/‘</p></blockquote><p>当你的博客网址不是第一路径时（就是网址不是../..这种形式，有/就表示你的博客在一个子路径里面），你要密切注意子路径的配置方式。很多人的博客项目实际网址是 yourname.github.io/blog/ 这时候你就必须要在 _config.yml 文件里面严格按照下面的方式来配置:</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-attr">url:</span> <span class="hljs-string">https://yourname.github.io/blog/</span>
+yourname.github.io/css/1.css</code></pre></div><p>其实Hexo文档里面已经提示过你了：</p><blockquote><p>URL<br>If your site is put in a subdirectory, set url as ‘<a href="http://yoursite.com/child&#39;">http://yoursite.com/child&#39;</a> and root as ‘/child/‘</p></blockquote><p>当你的博客网址不是第一路径时（就是网址中带有/，有/就表示你的博客在一个子路径里面），你要密切注意子路径的配置方式。很多人的博客项目实际网址是 yourname.github.io/blog/这样的形式，这时候你就必须要在 _config.yml 文件里面严格按照下面的方式来配置:</p><div class="hljs"><pre><code class="hljs yaml"><span class="hljs-attr">url:</span> <span class="hljs-string">https://yourname.github.io/blog/</span>
 <span class="hljs-attr">root:</span> <span class="hljs-string">/blog/</span></code></pre></div><p>这是我在搭建博客时候碰到的两个坑，总结一下方便其他朋友绕坑。</p><h3 id="如何删除submodule"><a href="#如何删除submodule" class="headerlink" title="如何删除submodule"></a>如何删除submodule</h3><p>如果想停止使用submodule的方式引入主题，可以使用下面的命令：</p><div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># Remove the submodule entry from .git/config</span>
 git submodule deinit -f path/to/submodule
 
