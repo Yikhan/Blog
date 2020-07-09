@@ -1,11 +1,12 @@
 ---
-title: 前端学习笔记 (chap.1) - Promise
+title: 前端学习笔记 (chap.1.2) - Promise
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-06-30 23:00:37
 tags:
   - javascript
 categories:
   - 编程技巧
+  - 前端学习笔记
 index_img: /img/promise.png
 ---
 
@@ -93,7 +94,7 @@ console.log('finally')
 
 当fn1当中不使用await时，执行顺序为：
 
-```ps
+```text
 fn1 start
 fn2 start
 fn3 start
@@ -127,7 +128,7 @@ async function fn1() {
 
 如果我们在`fn2()`前面加个await的话，打印顺序就不一样了
 
-```ps
+```text
 fn1 start
 fn2 start
 fn3 start

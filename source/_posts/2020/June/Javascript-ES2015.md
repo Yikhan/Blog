@@ -1,11 +1,12 @@
 ---
-title: 前端学习笔记 (chap.2) - ES2015
+title: 前端学习笔记 (chap.1.3) - ES2015
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-06-30 23:12:13
 tags:
   - javascript
 categories:
   - 编程技巧
+  - 前端学习笔记
 index_img: /img/ES6.png
 ---
 
@@ -62,13 +63,15 @@ i++
 // 以上重复三次
 ```
 
-最后let和const都不会自动提升，必须声明后才能使用，否则抛出RefError，但要特别注意的是：**所谓的不会提升(hoist)指的是初始化不会提升，而不是声明不会提升**
+最后let和const都不会自动提升，必须声明后才能使用，否则抛出RefError
+
+但要特别注意的是：**所谓的不会提升(hoist)指的是初始化不会提升，而不是声明不会提升**
 
 let和const的声明依然会被提升，这是Javascript的底层机制决定的，Javascript引擎会在进入每个作用域时寻找该作用域内部的所有变量声明并创建它们
 
 唯一的区别就是，var还会执行初始化（undefined），而let和const不会，这就是为何在赋值前使用let和const会抛出异常的真正原因
 
-[参考资料:let存在变量提升吗？](https://www.jianshu.com/p/0f49c88cf169)
+[参考资料: let存在变量提升吗？](https://www.jianshu.com/p/0f49c88cf169)
 
 ## 2. Proxy
 

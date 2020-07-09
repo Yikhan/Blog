@@ -1,11 +1,12 @@
 ---
-title: 前端学习笔记 (chap.2) - Javascript性能优化
+title: 前端学习笔记 (chap.1.4) - Javascript性能优化
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-06-30 23:18:03
 tags:
   - javascript
 categories:
   - 编程技巧
+  - 前端学习笔记
 index_img: /img/performance.png
 ---
 
@@ -128,7 +129,7 @@ for (let i = 0; i < 10000; i++) {
 
 ![image-20200630180407937](https://cdn.jsdelivr.net/gh/Yikhan/ImageHost/blog/image-20200630180407937.png)
 
-可以发现forEach的速度是最快的
+可以发现forEach的速度是最快的（但这个结果或许并不准确，关于forEach和for的对比争论在stackoverflow上很多，两者其实在不同场景各有胜负，不过从语义角度而言，forEach作为比较新的语法表达更简洁易读，但要注意的是forEach不能使用break/continue来中断，而ES2015/ES6新加入的for of则可以）
 
 ### 7. 使用文档碎片优化节点添加
 
