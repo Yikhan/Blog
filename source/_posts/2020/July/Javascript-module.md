@@ -23,7 +23,7 @@ index_img: /img/module.png
 
 ```html
 <script type="module">
-	var foo = 100
+    var foo = 100
     console.log(foo)
 </script>
 ```
@@ -65,7 +65,7 @@ export default { foo }
 
 // 或者使用as
 export {
-	foo as default,
+    foo as default,
     bar as baz
 }
 ```
