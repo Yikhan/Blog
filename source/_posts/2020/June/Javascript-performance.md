@@ -1,5 +1,5 @@
 ---
-title: 前端学习笔记 (chap.1.4) - Javascript性能优化
+title: Javascript性能优化
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-06-30 23:18:03
 tags:

@@ -1,5 +1,5 @@
 ---
-title: 前端学习笔记 (chap.1.1) - 函数式编程
+title: 函数式编程
 date: 2020-06-16 19:34:24
 tags:
   - javascript

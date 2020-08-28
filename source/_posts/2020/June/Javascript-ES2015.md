@@ -1,5 +1,5 @@
 ---
-title: 前端学习笔记 (chap.1.3) - ES2015
+title: ES2015
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-06-30 23:12:13
 tags:

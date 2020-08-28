@@ -1,5 +1,5 @@
 ---
-title: 前端学习笔记 (chap.2.1) - 自动化构建工具Gulp
+title: 自动化构建工具Gulp
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-07-09 21:48:19
 tags:

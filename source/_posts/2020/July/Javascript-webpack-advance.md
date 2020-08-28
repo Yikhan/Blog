@@ -1,5 +1,5 @@
 ---
-title: 前端学习笔记 (chap.2.4) - Webpack进阶
+title: Webpack进阶
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-07-17 11:59:38
 tags:

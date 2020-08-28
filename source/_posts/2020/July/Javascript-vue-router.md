@@ -1,9 +1,10 @@
 ---
-title: 前端学习笔记 (chap.3.1) - VueRouter的原理和实现
+title: VueRouter的原理和实现
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-07-30 14:14:38
 tags:
   - javascript
+  - Vue
 categories:
   - 编程技巧
   - 前端学习笔记
