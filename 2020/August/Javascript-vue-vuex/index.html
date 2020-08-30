@@ -9,7 +9,7 @@
 <span class="javascript">    title: <span class="hljs-built_in">String</span></span>
   &#125;
 &#125;
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>props的使用非常广泛，几乎所有Vue都会使用，其最大的不足是只能父传子，不能子传父。</p><h3 id="1-2-Event"><a href="#1-2-Event" class="headerlink" title="1.2 Event"></a>1.2 Event</h3><p>事件机制是另一种可以传递数据的方法，主要就是使用Vue提供的<code>$emit</code>方法，配合<code>v-on</code>指令</p><p>父组件：</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>props的使用非常广泛，几乎所有Vue项目都会使用，其最大的不足是只能父传子，不能子传父。</p><h3 id="1-2-Event"><a href="#1-2-Event" class="headerlink" title="1.2 Event"></a>1.2 Event</h3><p>事件机制是另一种可以传递数据的方法，主要就是使用Vue提供的<code>$emit</code>方法，配合<code>v-on</code>指令</p><p>父组件：</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">"&#123; fontSize: hFontSize + 'em'&#125;"</span>&gt;</span>Event Up Parent<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
     v-on:事件名=要触发的函数或者表达式
