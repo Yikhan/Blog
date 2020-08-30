@@ -1,57 +1,57 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Vuex数据流心法 - Hexo</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>逸水寒兮的博客</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> Home</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> Archives</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> Categories</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> Tags</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> About</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(https://wallroom.io/img/1920x1080/bg-02fdff7.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-08-30 18:19">August 30, 2020 pm</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 2.1k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 29 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="Vuex-数据流心法"><a href="#Vuex-数据流心法" class="headerlink" title="Vuex 数据流心法"></a>Vuex 数据流心法</h1><h2 id="1-父子组件传递数据的传统方法"><a href="#1-父子组件传递数据的传统方法" class="headerlink" title="1. 父子组件传递数据的传统方法"></a>1. 父子组件传递数据的传统方法</h2><p>自从组件化模式成为前端主流后，开发中的一大问题就是如何在父子组件之间传递数据。</p><h3 id="1-1-Props"><a href="#1-1-Props" class="headerlink" title="1.1 Props"></a>1.1 Props</h3><p>Vue本身提供的props是最简单，也是最常用的父子组件通讯方式</p><p>父组件可以在html模板里直接把数据传递给子组件。</p><p>父组件：调用子组件时传递props</p><div class="hljs"><pre><code class="hljs vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;h1&gt;Props Down Parent&lt;&#x2F;h1&gt;
-    &lt;child title&#x3D;&quot;My journey with Vue&quot;&gt;&lt;&#x2F;child&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;</code></pre></div><p>子组件：声明要接收的props</p><div class="hljs"><pre><code class="hljs vue">&lt;script&gt;
-export default &#123;
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content=""><meta name="author" content="John Doe"><meta name="keywords" content=""><title>Vuex数据流心法 - Hexo</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>逸水寒兮的博客</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> Home</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> Archives</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> Categories</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> Tags</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> About</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(https://wallroom.io/img/1920x1080/bg-02fdff7.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-08-30 18:19">August 30, 2020 pm</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 2k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 27 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="Vuex-数据流心法"><a href="#Vuex-数据流心法" class="headerlink" title="Vuex 数据流心法"></a>Vuex 数据流心法</h1><h2 id="1-父子组件传递数据的传统方法"><a href="#1-父子组件传递数据的传统方法" class="headerlink" title="1. 父子组件传递数据的传统方法"></a>1. 父子组件传递数据的传统方法</h2><p>自从组件化模式成为前端主流后，开发中的一大问题就是如何在父子组件之间传递数据。</p><h3 id="1-1-Props"><a href="#1-1-Props" class="headerlink" title="1.1 Props"></a>1.1 Props</h3><p>Vue本身提供的props是最简单，也是最常用的父子组件通讯方式</p><p>父组件可以在html模板里直接把数据传递给子组件。</p><p>父组件：调用子组件时传递props</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Props Down Parent<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">title</span>=<span class="hljs-string">"My journey with Vue"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></code></pre></div><p>子组件：声明要接收的props</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
   props: &#123;
-    title: String
+<span class="javascript">    title: <span class="hljs-built_in">String</span></span>
   &#125;
 &#125;
-&lt;&#x2F;script&gt;</code></pre></div><p>props的使用非常广泛，几乎所有Vue都会使用，其最大的不足是只能父传子，不能子传父。</p><h3 id="1-2-Event"><a href="#1-2-Event" class="headerlink" title="1.2 Event"></a>1.2 Event</h3><p>事件机制是另一种可以传递数据的方法，主要就是使用Vue提供的<code>$emit</code>方法，配合<code>v-on</code>指令</p><p>父组件：</p><div class="hljs"><pre><code class="hljs vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;h1 :style&#x3D;&quot;&#123; fontSize: hFontSize + &#39;em&#39;&#125;&quot;&gt;Event Up Parent&lt;&#x2F;h1&gt;
-    v-on:事件名&#x3D;要触发的函数或者表达式
-    &lt;child :fontSize&#x3D;&quot;hFontSize&quot; v-on:enlargeText&#x3D;&quot;enlargeText&quot;&gt;&lt;&#x2F;child&gt; 
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>props的使用非常广泛，几乎所有Vue都会使用，其最大的不足是只能父传子，不能子传父。</p><h3 id="1-2-Event"><a href="#1-2-Event" class="headerlink" title="1.2 Event"></a>1.2 Event</h3><p>事件机制是另一种可以传递数据的方法，主要就是使用Vue提供的<code>$emit</code>方法，配合<code>v-on</code>指令</p><p>父组件：</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">"&#123; fontSize: hFontSize + 'em'&#125;"</span>&gt;</span>Event Up Parent<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    v-on:事件名=要触发的函数或者表达式
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">:fontSize</span>=<span class="hljs-string">"hFontSize"</span> <span class="hljs-attr">v-on:enlargeText</span>=<span class="hljs-string">"enlargeText"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span> 
     $event是默认的事件参数
-    &lt;child :fontSize&#x3D;&quot;hFontSize&quot; v-on:enlargeText&#x3D;&quot;hFontSize +&#x3D; $event&quot;&gt;&lt;&#x2F;child&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-&lt;script&gt;
-export default &#123;
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">:fontSize</span>=<span class="hljs-string">"hFontSize"</span> <span class="hljs-attr">v-on:enlargeText</span>=<span class="hljs-string">"hFontSize += $event"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
   components: &#123;
     child
   &#125;,
   data () &#123;
-    return &#123;
+<span class="actionscript">    <span class="hljs-keyword">return</span> &#123;</span>
       hFontSize: 1
     &#125;
   &#125;,
   methods: &#123;
     enlargeText (size) &#123;
-      this.hFontSize +&#x3D; size
+<span class="actionscript">      <span class="hljs-keyword">this</span>.hFontSize += size</span>
     &#125;
   &#125;
 &#125;
-&lt;&#x2F;script&gt;</code></pre></div><p>子组件：</p><div class="hljs"><pre><code class="hljs vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;h1 :style&#x3D;&quot;&#123; fontSize: fontSize + &#39;em&#39; &#125;&quot;&gt;Props Down Child&lt;&#x2F;h1&gt;
-    &lt;button @click&#x3D;&quot;handler&quot;&gt;文字增大&lt;&#x2F;button&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
-&lt;script&gt;
-export default &#123;
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>子组件：</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">:style</span>=<span class="hljs-string">"&#123; fontSize: fontSize + 'em' &#125;"</span>&gt;</span>Props Down Child<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"handler"</span>&gt;</span>文字增大<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
   props: &#123;
-    fontSize: Number
+<span class="javascript">    fontSize: <span class="hljs-built_in">Number</span></span>
   &#125;,
   methods: &#123;
     handler () &#123;
-      this.$emit(&#39;enlargeText&#39;, 0.1)
+<span class="actionscript">      <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'enlargeText'</span>, <span class="hljs-number">0.1</span>)</span>
     &#125;
   &#125;
 &#125;
-&lt;&#x2F;script&gt;</code></pre></div><p>子组件使用<code>$emit</code>来触发事件并传递参数，父组件通过<code>v-on:eventName=handler</code>来接收特定的事件并触发函数。</p><p>这样一来就实现了子组件向父组件传递传递数据。</p><p>要注意的是，<code>$emit</code>可以传递任意数量的参数，其函数原型是：</p><p><code>vm.$emit( eventName, […args\] )</code></p><p>另外在接收参数的时候，<code>$event</code>会作为第一个传上来的参数，可以直接用于表达式：</p><p><code>v-on:enlargeText=&quot;hFontSize += $event&quot;</code></p><p>或者是函数参数：</p><p><code>v-on:enlargeText=&quot;enlargeText($event)&quot;</code></p><p>但<code>$event</code>仅能默认接收第一个参数，所以如果<code>$emit</code>传递了多个参数，就不能使用<code>$event</code>来接收，直接使用函数名就可以了：</p><p>``v-on:enlargeText=”enlargeText`</p><p>在<code>hanlder</code>实现的时候再把要接收的参数个数以形参的方式定义清楚：</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-comment">// 假设$emit传递上来了两个参数</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>子组件使用<code>$emit</code>来触发事件并传递参数，父组件通过<code>v-on:eventName=handler</code>来接收特定的事件并触发函数。</p><p>这样一来就实现了子组件向父组件传递传递数据。</p><p>要注意的是，<code>$emit</code>可以传递任意数量的参数，其函数原型是：</p><p><code>vm.$emit( eventName, […args\] )</code></p><p>另外在接收参数的时候，<code>$event</code>会作为第一个传上来的参数，可以直接用于表达式：</p><p><code>v-on:enlargeText=&quot;hFontSize += $event&quot;</code></p><p>或者是函数参数：</p><p><code>v-on:enlargeText=&quot;enlargeText($event)&quot;</code></p><p>但<code>$event</code>仅能默认接收第一个参数，所以如果<code>$emit</code>传递了多个参数，就不能使用<code>$event</code>来接收，直接使用函数名就可以了：</p><p>``v-on:enlargeText=”enlargeText`</p><p>在<code>hanlder</code>实现的时候再把要接收的参数个数以形参的方式定义清楚：</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-comment">// 假设$emit传递上来了两个参数</span>
 enlargeText (arg1, arg2) &#123;
   <span class="hljs-built_in">console</span>.log(arg1, arg2)
 &#125;
@@ -90,45 +90,45 @@ enlargeText (...args) &#123;
       <span class="hljs-keyword">this</span>.msg = <span class="hljs-string">`您选择了<span class="hljs-subst">$&#123;value&#125;</span>件商品`</span>
     &#125;)
   &#125;
-&#125;</code></pre></div><p>对一些比较简单的Vue项目而言，Event Bus就已经够用了。</p><h3 id="1-4-Refs"><a href="#1-4-Refs" class="headerlink" title="1.4 Refs"></a>1.4 Refs</h3><p>Vue提供的<code>$refs</code>一般用于获取DOM元素，但其实也可以用来传递数据。</p><p>父组件：</p><div class="hljs"><pre><code class="hljs vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;h1&gt;ref Parent&lt;&#x2F;h1&gt;
-    &lt;child ref&#x3D;&quot;c&quot;&gt;&lt;&#x2F;child&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
+&#125;</code></pre></div><p>对一些比较简单的Vue项目而言，Event Bus就已经够用了。</p><h3 id="1-4-Refs"><a href="#1-4-Refs" class="headerlink" title="1.4 Refs"></a>1.4 Refs</h3><p>Vue提供的<code>$refs</code>一般用于获取DOM元素，但其实也可以用来传递数据。</p><p>父组件：</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ref Parent<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">child</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"c"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 
-&lt;script&gt;
-import child from &#39;.&#x2F;child&#39;
-export default &#123;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript"><span class="hljs-keyword">import</span> child <span class="hljs-keyword">from</span> <span class="hljs-string">'./child'</span></span>
+<span class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
   components: &#123;
     child
   &#125;,
   mounted () &#123;
-    this.$refs.c.focus()
-    this.$refs.c.value &#x3D; &#39;hello input&#39;
+<span class="actionscript">    <span class="hljs-keyword">this</span>.$refs.c.focus()</span>
+<span class="actionscript">    <span class="hljs-keyword">this</span>.$refs.c.value = <span class="hljs-string">'hello input'</span></span>
   &#125;
 &#125;
-&lt;&#x2F;script&gt;</code></pre></div><p>子组件</p><div class="hljs"><pre><code class="hljs vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;h1&gt;ref Child&lt;&#x2F;h1&gt;
-    &lt;input ref&#x3D;&quot;input&quot; type&#x3D;&quot;text&quot; v-model&#x3D;&quot;value&quot;&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>子组件</p><div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>ref Child<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"input"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"value"</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
 
-&lt;script&gt;
-export default &#123;
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span>
   data () &#123;
-    return &#123;
-      value: &#39;&#39;
+<span class="actionscript">    <span class="hljs-keyword">return</span> &#123;</span>
+<span class="actionscript">      value: <span class="hljs-string">''</span></span>
     &#125;
   &#125;,
   methods: &#123;
     focus () &#123;
-      this.$refs.input.focus()
+<span class="actionscript">      <span class="hljs-keyword">this</span>.$refs.input.focus()</span>
     &#125;
   &#125;
 &#125;
-&lt;&#x2F;script&gt;</code></pre></div><p>可以看到父组件直接通过<code>$refs</code>拿到子组件的引用，然后直接访问了子组件的<code>data</code>数据。</p><p>但这种方法官方并不推荐，属于“奇巧淫技”，因为这样传递数据非常不利于日后的管理维护。</p><h2 id="2-Vuex"><a href="#2-Vuex" class="headerlink" title="2. Vuex"></a>2. Vuex</h2><h3 id="2-1-Vuex基础"><a href="#2-1-Vuex基础" class="headerlink" title="2.1 Vuex基础"></a>2.1 Vuex基础</h3><p>Vuex提供了一种新的统一集成式管理数据的解决方案，本质来说就是使用一个单独的js对象来在组件之间传递数据，类似Event Bus都是采用了一个中间者来统一管理和分发数据。</p><p><a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">Vuex文档</a></p><p>Vuex非常简洁好上手，配置方便，核心概念主要有</p><table><thead><tr><th></th><th>作用</th><th>调用方法</th></tr></thead><tbody><tr><td>State</td><td>存放数据，是一个单一状态树</td><td><code>$store.state.x</code></td></tr><tr><td>Getter</td><td>类似computed，用于从state派生变量</td><td><code>$store.getters.x</code></td></tr><tr><td>Mutation</td><td>类似event，是一个函数，调用后改变state内的数据，只能执行同步操作</td><td><code>$store.commit(&#39;x&#39;, payload)</code> or <code>$store.commit({type:&#39;x&#39;, payload})</code></td></tr><tr><td>Action</td><td>提交mutation，可以包含异步操作</td><td><code>$store.dispatch(&#39;x&#39;, payload)</code> or <code>$store.dispatch({type:&#39;x&#39;, payload})</code></td></tr><tr><td>Module</td><td>把数据分割成模块，每个模块都有各自的一套state，mutation，action等</td><td>推荐在导出每个模块时开启<code>namespaced:true</code></td></tr></tbody></table><p><img src="https://vuex.vuejs.org/vuex.png" srcset="/img/loading.gif" alt="Vuex数据流"></p><p>官网文档对于基本用法的介绍十分详细，这里就不再举例说明了。</p><p>比较值得一提的是module的使用和Vuex提供的一些工具方法。</p><p>一般实际开发中我们都会把store模块化，以便于管理和维护。</p><p>首先推荐在各个module里面开启<code>namespaced</code>，这个不是必须的，但是开启后所有的数据变化操作都可以指定是最哪个模块进行，否则由于Vuex会把所有的getter，mutation等方法都默认放在同一个全局空间里，多个同名的方法会被同时触发。</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div><p>可以看到父组件直接通过<code>$refs</code>拿到子组件的引用，然后直接访问了子组件的<code>data</code>数据。</p><p>但这种方法官方并不推荐，属于“奇巧淫技”，因为这样传递数据非常不利于日后的管理维护。</p><h2 id="2-Vuex"><a href="#2-Vuex" class="headerlink" title="2. Vuex"></a>2. Vuex</h2><h3 id="2-1-Vuex基础"><a href="#2-1-Vuex基础" class="headerlink" title="2.1 Vuex基础"></a>2.1 Vuex基础</h3><p>Vuex提供了一种新的统一集成式管理数据的解决方案，本质来说就是使用一个单独的js对象来在组件之间传递数据，类似Event Bus都是采用了一个中间者来统一管理和分发数据。</p><p><a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">Vuex文档</a></p><p>Vuex非常简洁好上手，配置方便，核心概念主要有</p><table><thead><tr><th></th><th>作用</th><th>调用方法</th></tr></thead><tbody><tr><td>State</td><td>存放数据，是一个单一状态树</td><td><code>$store.state.x</code></td></tr><tr><td>Getter</td><td>类似computed，用于从state派生变量</td><td><code>$store.getters.x</code></td></tr><tr><td>Mutation</td><td>类似event，是一个函数，调用后改变state内的数据，只能执行同步操作</td><td><code>$store.commit(&#39;x&#39;, payload)</code> or <code>$store.commit({type:&#39;x&#39;, payload})</code></td></tr><tr><td>Action</td><td>提交mutation，可以包含异步操作</td><td><code>$store.dispatch(&#39;x&#39;, payload)</code> or <code>$store.dispatch({type:&#39;x&#39;, payload})</code></td></tr><tr><td>Module</td><td>把数据分割成模块，每个模块都有各自的一套state，mutation，action等</td><td>推荐在导出每个模块时开启<code>namespaced:true</code></td></tr></tbody></table><p><img src="https://vuex.vuejs.org/vuex.png" srcset="/img/loading.gif" alt="Vuex数据流"></p><p>官网文档对于基本用法的介绍十分详细，这里就不再举例说明了。</p><p>比较值得一提的是module的使用和Vuex提供的一些工具方法。</p><p>一般实际开发中我们都会把store模块化，以便于管理和维护。</p><p>首先推荐在各个module里面开启<code>namespaced</code>，这个不是必须的，但是开启后所有的数据变化操作都可以指定是最哪个模块进行，否则由于Vuex会把所有的getter，mutation等方法都默认放在同一个全局空间里，多个同名的方法会被同时触发。</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;
   namespaced: <span class="hljs-literal">true</span>,
   state,
   getters,
