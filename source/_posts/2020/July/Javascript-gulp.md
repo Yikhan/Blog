@@ -4,9 +4,10 @@ banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-07-09 21:48:19
 tags:
   - javascript
+  - gulp
 categories:
-  - 编程技巧
   - 前端学习笔记
+  - 自动化工具
 index_img: /img/glup.png
 ---
 

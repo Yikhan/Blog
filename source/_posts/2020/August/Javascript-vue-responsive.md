@@ -6,7 +6,6 @@ tags:
   - javascript
   - Vue
 categories:
-  - 编程技巧
   - 前端学习笔记
 index_img: /img/vue.jpg
 ---

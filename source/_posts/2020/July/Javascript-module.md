@@ -5,7 +5,6 @@ date: 2020-07-17 11:57:38
 tags:
   - javascript
 categories:
-  - 编程技巧
   - 前端学习笔记
 index_img: /img/module.png
 ---

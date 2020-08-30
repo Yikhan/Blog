@@ -5,7 +5,6 @@ date: 2020-06-30 23:00:37
 tags:
   - javascript
 categories:
-  - 编程技巧
   - 前端学习笔记
 index_img: /img/promise.png
 ---

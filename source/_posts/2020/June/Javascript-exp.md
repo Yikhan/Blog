@@ -4,7 +4,6 @@ date: 2020-06-16 19:34:24
 tags:
   - javascript
 categories:
-  - 编程技巧
   - 前端学习笔记
 index_img: /img/Javascript.jpg
 banner_img: https://wallroom.io/img/1920x1080/bg-02fdff7.jpg
