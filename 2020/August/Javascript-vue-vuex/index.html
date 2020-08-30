@@ -59,7 +59,7 @@ enlargeText (arg1, arg2) &#123;
 <span class="hljs-comment">// 当然使用解构语法也是可以的</span>
 enlargeText (...args) &#123;
   <span class="hljs-built_in">console</span>.log(args)
-&#125;</code></pre></div><h3 id="1-3-Event-Bus"><a href="#1-3-Event-Bus" class="headerlink" title="1.3 Event Bus"></a>1.3 Event Bus</h3><p>事件传递机制虽然简单易用，但是如果要跨层级通讯机会十分繁琐，必须层层上传，而且如果是同级别组件也无法使用。于是第三种传递方式应运而生，充分利用了Vue实例的功能。</p><p>Event Bus的思想是创造一个新的Vue实例作为事件中心，其他组件向这个新的Vue实例传递事件，并且通过它获取自己需要关注的事件。</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-comment">// 创建一个Vue实例作为Event Bus</span>
+&#125;</code></pre></div><h3 id="1-3-Event-Bus"><a href="#1-3-Event-Bus" class="headerlink" title="1.3 Event Bus"></a>1.3 Event Bus</h3><p>事件传递机制虽然简单易用，但是如果要跨层级进行组件通讯会十分繁琐，必须层层上传，而且如果是同级别组件也无法传递。于是第三种传递方式事件总线Event Bus应运而生。</p><p>事件总线Event Bus的思路是创造一个新的Vue实例作为事件中心，其他组件向这个新的Vue实例传递事件，并且通过它订阅自己需要关注的事件。</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-comment">// 创建一个Vue实例作为Event Bus</span>
 <span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Vue()
 
