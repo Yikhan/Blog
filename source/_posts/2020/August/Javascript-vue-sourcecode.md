@@ -240,7 +240,7 @@ export function nextTick (cb?: Function, ctx?: Object) {
   })
   if (!pending) {
     pending = true
-    // 调用
+    // 通过异步api调用回调函数
     timerFunc()
   }
   // $flow-disable-line
@@ -255,7 +255,7 @@ export function nextTick (cb?: Function, ctx?: Object) {
 
 了解JS的异步知识之后，很容易想到`nextTick`必然也是借助了`Promise`等异步api来实现。
 
-源码中的细节会更加复杂一些，因为要考虑到环境中不支持`Promise`的情况，也就是19行的那个`timerFunc`
+源码中的细节会更加复杂一些，因为要考虑到环境中不支持`Promise`的情况，也就是19行的那个`timerFunc`，回调的异步调用是在这个函数里完成的。
 
 Vue考虑到了各种环境里面的异步api情况，总结一下就是以下面的顺序来决定使用哪个api实现异步延时：
 
