@@ -102,12 +102,5 @@ deploy:
   repo: https://github.com/Yikhan/blog.git
   branch: master
 
-# Comment system
-gitalk:
-  client_id: '23fee418d58228cb47b2'
-  client_secret: '26d0961742f85bc012657678bee5e03a806b4519'
-  repo: 'Yikhan.github.io'
-  owner: 'Yikhan'
-
 # Minify
 all_minifier: true

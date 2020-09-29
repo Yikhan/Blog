@@ -212,28 +212,11 @@ fn1 end
 
 `await`背后的生成器可以真正做到“暂停”代码。
 
-我们知道`async`函数返回的是一个`Promise`，所以`Promise.resolve(fn2())`里面fn2本身返回了一个`Promise`，如果这个`Promise`状态是fulfilled了才会把后续的`then`放入异步队列，而这时由于fn2中使用了`await`，fn2在运行完之前这个返回的`Promise`一直是pending状态，所以`Promise.resolve(fn2()).then()`后面的`then`无法马上进入异步队列，只能等待fn2继续执行完`await`之后的所有代码。
+我们知道`async`函数返回的是一个`Promise`，所以`Promise.resolve(fn2())`里面fn2本身返回了一个`Promise`，如果这个`Promise`状态是fulfilled了才会把后续的`then`放入异步队列，而这时由于fn2中使用了`await`，fn2在运行完之前这个返回的`Promise`一直是pending状态，所以`Promise.resolve(fn2())`后面的`then`无法马上进入异步队列，只能等待fn2继续执行完`await`之后的所有代码。
 
-这也是`await`强大的地方，因为它从真正意义上做到了“等待异步执行”，而不是仅仅把后续代码放入异步队列而已！这个区别非常重要，值得专门列出来：
+这也是`await`强大的地方，因为它从真正意义上做到了“等待异步执行”，而不是仅仅把后续代码放入异步队列而已！这个区别非常重要。
 
-- fn1里面使用
-
-  ```js
-  Promise.resolve(foo()).then(bar())
-  ```
-
-  把`bar()`放入异步队列就完事儿了，fn1会主动执行完剩下所有的同步代码然后返回，`then`里面的回调`bar()`不影响fn1是否执行完成，外部调用fn1的调用者会接收到一个已经fulfilled的`Promise`，并且这个`Promise`中resolve的值就是fn1同步代码部分的返回值（如果没有就是`undefined`）
-
-- fn2里面使用
-
-  ```js
-  await foo()
-  bar()
-  ```
-
-  fn2会等待`foo()`执行完毕，剩下的所有同步代码包括`bar()`被阻塞，fn2处于“暂停”状态，没有执行完毕，外面调用fn2的调用者会接收到一个pending中的`Promise`。
-
-最后值得一提的是，`Promise.resolve`有一个特性，如果resolve的值本来就是一个`Promise`，就会直接返回这个`Promise`而不是新生成一个，否则`Promise.resolve(fn2()).then`后面`then`接收到的只会是fn2返回的`Promise`，而不是里面resolve的值。
+最后值得一提的是，`Promise.resolve`有一个特性，如果resolve的值本来就是一个`Promise`，就会直接返回这个`Promise`而不是新生成一个。
 
 ## 3. 深入理解then
 

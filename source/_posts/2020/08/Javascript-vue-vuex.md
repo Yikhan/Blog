@@ -1,5 +1,5 @@
 ---
-title: Vuex数据流心法
+title: Vuex 数据流心法
 banner_img: 'https://wallroom.io/img/1920x1080/bg-02fdff7.jpg'
 date: 2020-08-30 18:19:59
 tags:

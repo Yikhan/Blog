@@ -20,11 +20,17 @@ title_join_string: ' - '  # 浏览器标签页中的标题分隔符，效果： 
 
 force_https: false  # 强制所有链接升级为 HTTPS（适用于图片等资源出现 HTTP 混入报错）
 
-highlight: # 代码高亮
-  enable: true
-  style: 'monokai-sublime'  # 高亮样式见：https://highlightjs.org/static/demo/  在页面挑选 style 填入
-  bg_color: true  # 是否根据 style 改变代码背景色，**如果 style 是深色背景别忘了开启此项**
+code:  # 代码块相关的配置
   copy_btn: true  # 是否开启复制代码的按钮
+  highlight:  # 代码高亮
+    enable: true
+    lib: 'highlightjs'  # 实现高亮的库，可选：highlightjs | prismjs，对应下面的配置项
+    highlightjs:
+      style: 'monokai-sublime'  # 高亮样式见：https://highlightjs.org/static/demo/  在页面挑选 style 填入
+      bg_color: true  # 是否根据 style 改变代码背景色，**如果 style 是深色背景别忘了开启此项**
+    prismjs:
+      style: 'default'  # 高亮样式见：https://prismjs.com/  在页面右侧的圆形按钮挑选 style 填入，也可以直接填入 css 链接
+      preprocess: true  # 设为 true 高亮将本地静态生成（并只支持部分 prismjs 插件），设为 false 高亮将在浏览器通过 js 生成
 
 fun_features: # 一些好玩的功能
   typing: # 为 subtitle 添加打字机效果
@@ -41,6 +47,10 @@ fun_features: # 一些好玩的功能
   mouse_click:  # 鼠标点击动效
     enable: false
     style: values # 目前设置两个值：values（价值观词汇） | love（爱心）
+
+dark_mode:   # 主题暗色模式，开启后菜单中会出现切换按钮，用户浏览器会存储切换选项，并且会遵循 prefers-color-scheme 自动切换
+  enable: true
+  default: auto  # 默认的模式：auto | light | dark，选择 auto 时优先遵循 prefers-color-scheme，其次按用户本地时间 18 点到次日 6 点之间进入暗色模式，**注意：当用户手动切换后则不再按照默认模式**
 
 color:  # 主题颜色配置，不一定能每一处都生效，可能会被局部样式覆盖，这种情况建议用自定义 css 解决。配色可以在这获得启发： https://www.webdesignrankings.com/resources/lolcolors/
   body_bg_color: "#eee"             # body 背景色
@@ -272,10 +282,10 @@ gitalk:
   clientSecret: '26d0961742f85bc012657678bee5e03a806b4519' # GitHub Application Client Secret
   repo:  'Yikhan.github.io'     # The repo to store comments
   owner: 'Yikhan'               # GitHub repository owner. Can be personal user or organization.
-  admin: 'Yikhan'               # GitHub repo owner and collaborators, only these guys can initialize github issues, should be like "['admin']" or "['admin1','admin2']"
+  admin: 'Yikhan'              # GitHub repo owner and collaborators, only these guys can initialize github issues, should be like "['admin']" or "['admin1','admin2']"
   id: location.pathname         # The unique id of the page. Length must less than 50.
   language: zh-CN               # Localization language key, en, zh-CN and zh-TW are currently available.
-  labels: "['Gitalk']"          # GitHub issue labels.
+  labels: ['Gitalk']            # GitHub issue labels.
   perPage: 15                   # Pagination size, with maximum 100.
   pagerDirection: last          # Comment sorting direction, available values are last and first.
   distractionFreeMode: false    # Facebook-like distraction free mode.
