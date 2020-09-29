@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="用于总结和分享个人技术学习心得"><meta name="author" content="Yihan Shaw"><meta name="keywords" content="前端技术"><title>ES2015 - 逸水寒兮</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/monokai-sublime.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.6.2/gitalk.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>逸水寒兮的博客</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(https://wallroom.io/img/1920x1080/bg-02fdff7.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-06-30 23:12">2020年6月30日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.7k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 23 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="ES2015"><a href="#ES2015" class="headerlink" title="ES2015"></a>ES2015</h1><h2 id="1-let和const的块作用域"><a href="#1-let和const的块作用域" class="headerlink" title="1. let和const的块作用域"></a>1. let和const的块作用域</h2><p>let和const的块级作用域是JS很大的一个进步，尤其是let在循环中的使用很有意思</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+      <span class="hljs-built_in">console</span>.log(i)
+    &#125;
+&#125;</code></pre></div><p>像上面那样在循坏的内外层使用同名变量i但却不会相互覆盖</p><p>同时我们也可以这样</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> elements = [&#123;&#125;, &#123;&#125;, &#123;&#125;]
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;elements.length;i++) &#123;
+  elements[i].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i)
+  &#125;
+&#125;
+elements[<span class="hljs-number">0</span>].onclick() <span class="hljs-comment">// 0</span></code></pre></div><p>这里通过闭包每个i都被单独地记住了</p><p>另外一个值得注意的地方是</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+  <span class="hljs-keyword">let</span> i = <span class="hljs-string">'foo'</span>
+  <span class="hljs-built_in">console</span>.log(i)
+&#125; <span class="hljs-comment">// 输出三次foo</span></code></pre></div><p>这里循环逻辑内部的i也不受影响，我们可以这样来理解，上面的代码其实等同于：</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>
+
+<span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">0</span>) &#123;
+  <span class="hljs-keyword">let</span> i = <span class="hljs-string">'foo'</span> <span class="hljs-comment">// 块作用域内部的i的独立的</span>
+  <span class="hljs-built_in">console</span>.log(i)
+&#125;
+
+i++
+<span class="hljs-comment">// 以上重复三次</span></code></pre></div><p>最后let和const都不会自动提升，必须声明后才能使用，否则抛出RefError</p><p>但要特别注意的是：<strong>所谓的不会提升(hoist)指的是初始化不会提升，而不是声明不会提升</strong></p><p>let和const的声明依然会被提升，这是Javascript的底层机制决定的，Javascript引擎会在进入每个作用域时寻找该作用域内部的所有变量声明并创建它们</p><p>唯一的区别就是，var还会执行初始化（undefined），而let和const不会，这就是为何在赋值前使用let和const会抛出异常的真正原因</p><p><a href="https://www.jianshu.com/p/0f49c88cf169" target="_blank" rel="noopener">参考资料: let存在变量提升吗？</a></p><h2 id="2-Proxy"><a href="#2-Proxy" class="headerlink" title="2. Proxy"></a>2. Proxy</h2><p>Proxy专门用于对对象进行代理操作，是比Object.defineProperty更灵活便捷的方法。Proxy内置了13个代理方法handler，又称为捕捉器，比如最常用的set和get</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> person = &#123;
+    name: <span class="hljs-string">'Tom'</span>,
+    age: <span class="hljs-number">20</span>
+&#125;
+
+<span class="hljs-keyword">const</span> personProxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(person, &#123;
+    <span class="hljs-keyword">get</span>(target, property) &#123;
+        <span class="hljs-keyword">return</span> property <span class="hljs-keyword">in</span> target ? target[property] : <span class="hljs-string">'default'</span>
+    &#125;,
+    <span class="hljs-keyword">set</span>(target, property, value) &#123;
+      <span class="hljs-comment">// 捕捉set进来的属性和值，可以进行任意额外的操作</span>
+      <span class="hljs-keyword">if</span> (property === <span class="hljs-string">'age'</span>) &#123;
+          <span class="hljs-keyword">if</span>(!<span class="hljs-built_in">Number</span>.isInteger(value)) &#123;
+              <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">`<span class="hljs-subst">$&#123;value&#125;</span> is not an integer`</span>)
+          &#125;
+      &#125;
+      target[property] = value
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-comment">// set方法需要返回一个bool值表示是否成功</span>
+    &#125;
+&#125;)</code></pre></div><p>Proxy比Object.defineProperty更为强大，事实上Proxy本身就自带了一个defineProperty的捕捉器</p><p>更重要的，Proxy可以方便地劫持数组操作，这也是Vue3.0使用Proxy代替了defineProperty的原因之一</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> list = []
+
+<span class="hljs-keyword">const</span> listProxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(list, &#123;
+  <span class="hljs-keyword">set</span>(target, property, value) &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'set'</span>, property, value)
+    target[property] = value
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+  &#125;
+&#125;)
+
+listProxy.push(<span class="hljs-number">100</span>)
+<span class="hljs-comment">// set 0 100</span>
+<span class="hljs-comment">// set length 1</span></code></pre></div><p>第一行的0表示数组下标0， 第二行的length表示对数组长度的操作。可见Proxy自己内部知道数组是如何被操作的，不再需要我们进行干涉，这比defineProperty方便了很多</p><p>Proxy对于对象的劫持是非侵入性的，可以任意代理一个已经被定义好的对象和其中的变量，而defineProperty则是一开始就需要声明好</p><h2 id="3-Reflect"><a href="#3-Reflect" class="headerlink" title="3. Reflect"></a>3. Reflect</h2><p>Reflect本身提供了一整套对象操作的拦截函数，可以说和Proxy有点相辅相成的感觉(特别是两者的自带方法都是13个)</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> person = &#123;
+    name: <span class="hljs-string">'Tom'</span>,
+    age: <span class="hljs-number">20</span>
+&#125;
+
+<span class="hljs-keyword">const</span> personProxy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Proxy</span>(person, &#123;
+    <span class="hljs-keyword">get</span>(target, property) &#123;
+      <span class="hljs-built_in">console</span>.log(target, property)
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">Reflect</span>.get(target, property)
+    &#125;
+&#125;)</code></pre></div><p>Reflect可以统一对象的操作方式。传统的JS里针对对象的操作种类繁多，而且语法差异很大，非常不规范，如下例</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> person = &#123;
+    name: <span class="hljs-string">'Tom'</span>,
+    age: <span class="hljs-number">20</span>
+&#125;
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'name'</span> <span class="hljs-keyword">in</span> person) <span class="hljs-comment">// 判断是否存在属性</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> person[<span class="hljs-string">'age'</span>]) <span class="hljs-comment">// 删除特定的属性</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.keys(person)) <span class="hljs-comment">// 获取所有属性名</span>
+
+<span class="hljs-comment">// 使用Reflect统一操作</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Reflect</span>.has(person, <span class="hljs-string">'name'</span>))
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Reflect</span>.deleteProperty(person, <span class="hljs-string">'age'</span>))
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Reflect</span>.ownKeys(person))</code></pre></div><h2 id="4-Set"><a href="#4-Set" class="headerlink" title="4. Set"></a>4. Set</h2><p>Set类似Python等语言中的集合，是数学概念集合的实现，最有用的地方就是去重</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> s = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Set</span>()
+s.add(<span class="hljs-number">1</span>).add(<span class="hljs-number">2</span>).add(<span class="hljs-number">2</span>).add(<span class="hljs-number">3</span>)
+<span class="hljs-built_in">console</span>.log(s) <span class="hljs-comment">// Set &#123;1, 2, 3&#125;</span>
+
+s.forEach(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(v))
+
+<span class="hljs-comment">// 注意Set是一个对象，并没有索引，所以不能使用for in</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> v <span class="hljs-keyword">of</span> s) &#123;
+  <span class="hljs-built_in">console</span>.log(s)
+&#125;
+
+<span class="hljs-built_in">console</span>.log(s.size) <span class="hljs-comment">// 获取大小</span>
+<span class="hljs-built_in">console</span>.log(s.has(<span class="hljs-number">100</span>)) <span class="hljs-comment">// 是否具有某个元素</span>
+<span class="hljs-built_in">console</span>.log(s.delete(<span class="hljs-number">3</span>)) <span class="hljs-comment">// 成功删除返回true，否则false</span>
+<span class="hljs-built_in">console</span>.log(s.clear()) <span class="hljs-comment">// 清空集合</span>
+
+<span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>]
+<span class="hljs-keyword">const</span> result = [ ... new <span class="hljs-built_in">Set</span>(arr)]
+<span class="hljs-built_in">console</span>.log(result)</code></pre></div><h2 id="5-Map"><a href="#5-Map" class="headerlink" title="5. Map"></a>5. Map</h2><p>即便有计算属性这个对象字面量的增强版，可以给对象添加动态的属性名，比如</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;
+  [<span class="hljs-built_in">Math</span>.ramdom()] : <span class="hljs-number">10</span>,
+  [<span class="hljs-number">1</span> + <span class="hljs-number">1</span>] : <span class="hljs-number">20</span>
+&#125;</code></pre></div><p>这种机制仍然有一个很大的限制，就是无法使用对象作为变量名</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;
+  [&#123;<span class="hljs-attr">a</span>: <span class="hljs-number">2</span>&#125;] : <span class="hljs-number">10</span>,
+  [&#123;<span class="hljs-attr">b</span>: <span class="hljs-number">3</span>&#125;]: <span class="hljs-number">30</span>
+&#125;
+
+<span class="hljs-built_in">console</span>.log(obj) <span class="hljs-comment">// &#123; '[object Object]': 30 &#125;</span>
+<span class="hljs-built_in">console</span>.log(obj[&#123;<span class="hljs-attr">a</span>: <span class="hljs-number">2</span>&#125;]) <span class="hljs-comment">// 30 错误值</span></code></pre></div><p>可以看到两个属性名其实都被toString之后再当做属性名，导致彼此覆盖掉了，因为任何对象toString = <code>[object Object]</code>。也就是说，传统的JS里对象的属性名只能为字符串。</p><p>Map就可以解决这个问题</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> m = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Map</span>()
+<span class="hljs-keyword">const</span> tom = &#123;<span class="hljs-attr">a</span>: <span class="hljs-number">10</span>&#125;
+
+m.set(tom, <span class="hljs-number">10</span>)
+<span class="hljs-built_in">console</span>.log(m) <span class="hljs-comment">// Map &#123; &#123; a: 10 &#125; =&gt; 10 &#125;</span>
+<span class="hljs-built_in">console</span>.log(m.get(tom)) <span class="hljs-comment">// 10 正确值</span>
+
+<span class="hljs-comment">// 和Set一样具有常用的基本操作</span>
+<span class="hljs-comment">// m.has()</span>
+<span class="hljs-comment">// m.delete()</span>
+<span class="hljs-comment">// m.clear()</span></code></pre></div><h2 id="6-Symbol"><a href="#6-Symbol" class="headerlink" title="6. Symbol"></a>6. Symbol</h2><p>Symbol是很有意思的一个数据类型，类似传统静态语言中常用的UID，专门用于生成一个不会重复的变量</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> x = <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">'Hi'</span>) <span class="hljs-comment">// 使用for来注册一个全局Symbol</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Symbol</span>.keyFor(x)) <span class="hljs-comment">// Hi</span></code></pre></div><p>如果不使用Symbol.for来注册，每次Symbol都会生成一个不同的新值</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">let</span> x = <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">'Hi'</span>)
+<span class="hljs-keyword">let</span> y = <span class="hljs-built_in">Symbol</span>.for(<span class="hljs-string">'Hi'</span>)
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'x'</span>) === <span class="hljs-built_in">Symbol</span>(<span class="hljs-string">'x'</span>)) <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(x === y) <span class="hljs-comment">// true</span></code></pre></div><p>Symbol的特性可以用来创造对象内部的私有成员</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> name = <span class="hljs-built_in">Symbol</span>()
+<span class="hljs-keyword">const</span> person = &#123;
+  [name]: <span class="hljs-string">'Yikhan'</span>,
+  say() &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>[name])
+  &#125;
+&#125;
+
+person.say() <span class="hljs-comment">// Yikhan</span></code></pre></div><p>进一步来说，因为这个功能Symbol也成为了JS的一些内置接口名称，比如<code>[Symbol.toStringTag]</code></p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;
+  [<span class="hljs-built_in">Symbol</span>.toStringTag]: <span class="hljs-string">'Awesome Name'</span>,
+  foo: <span class="hljs-number">10</span>
+&#125;
+
+<span class="hljs-built_in">console</span>.log(obj.toString()) <span class="hljs-comment">// [object Awesome Name]</span></code></pre></div><p>通过Symbol定义的属性，无论是使用for in还是<code>Object.keys()</code>，亦或是<code>JSON.stringify()</code>都是获取不到的，会直接被这些方法忽略掉</p><h2 id="7-Iterator"><a href="#7-Iterator" class="headerlink" title="7. Iterator"></a>7. Iterator</h2><p>迭代器接口直接和for of操作符相关，只有实现了这个接口才能调用for of来遍历元素</p><p>要注意的是for of不能直接遍历普通的Object，只能遍历<code>Object.values(obj)</code></p><p>迭代器接口的关键字就是在对象中实现<code>[Symbol.iterator]</code></p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;
+  store: [ <span class="hljs-string">'foo'</span>, <span class="hljs-string">'bar'</span>, <span class="hljs-string">'baz'</span> ],
+  [<span class="hljs-built_in">Symbol</span>.iterator]: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>
+
+    <span class="hljs-keyword">return</span> &#123;
+      next: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+        <span class="hljs-keyword">const</span> result = &#123;
+          value: <span class="hljs-keyword">this</span>.store[index],
+          done: index &gt;= <span class="hljs-keyword">this</span>.store.length
+        &#125;
+        index++
+        <span class="hljs-keyword">return</span> result
+      &#125;
+    &#125;
+  &#125;
+&#125;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> obj) &#123;
+  <span class="hljs-built_in">console</span>.log(item) <span class="hljs-comment">// foo bar baz</span>
+&#125;</code></pre></div><p>如果结合生成器generator，还可以进一步简化这个方法</p><div class="hljs"><pre><code class="hljs js"><span class="hljs-keyword">const</span> obj = &#123;
+  store: [ <span class="hljs-string">'foo'</span>, <span class="hljs-string">'bar'</span>, <span class="hljs-string">'baz'</span> ],
+  [<span class="hljs-built_in">Symbol</span>.iterator]: <span class="hljs-function"><span class="hljs-keyword">function</span>*(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> <span class="hljs-keyword">this</span>.store) &#123;
+      <span class="hljs-keyword">yield</span> item
+    &#125;
+  &#125;
+&#125;</code></pre></div></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">前端学习笔记</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/javascript/">javascript</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"><a href="/2020/06/Javascript-performance/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">Javascript性能优化</span> <span class="visible-mobile">上一篇</span></a></div><div class="post-next col-6"><a href="/2020/06/Javascript-promise/"><span class="hidden-mobile">Promise 异步操作的九阳神功</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="gitalk-container"></div><script type="text/javascript">function loadGitalk(){addScript("https://cdn.staticfile.org/gitalk/1.6.2/gitalk.min.js",function(){new Gitalk({clientID:"23fee418d58228cb47b2",clientSecret:"26d0961742f85bc012657678bee5e03a806b4519",repo:"Yikhan.github.io",owner:"Yikhan",admin:"Yikhan",id:"abe2f11339bee105f3f102052ebaa0c7",language:"zh-CN",perPage:15,pagerDirection:"last",createIssueManually:"true",distractionFreeMode:"false"}).render("gitalk-container")})}createObserver(loadGitalk,"gitalk-container")</script></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="statistics"><span id="busuanzi_container_site_pv" style="display:none">总访问量 <span id="busuanzi_value_site_pv"></span> 次 </span><span id="busuanzi_container_site_uv" style="display:none">总访客数 <span id="busuanzi_value_site_uv"></span> 人</span></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:0,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","ES2015&nbsp;"],cursorChar:"*",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script></body></html>
