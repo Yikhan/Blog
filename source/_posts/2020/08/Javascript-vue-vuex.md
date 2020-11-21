@@ -123,7 +123,7 @@ export default {
 
 但`$event`仅能默认接收第一个参数，所以如果`$emit`传递了多个参数，就不能使用`$event`来接收，直接使用函数名就可以了：
 
-``v-on:enlargeText="enlargeText`
+`v-on:enlargeText="enlargeText"`
 
 在`handler`函数实现的时候再把要接收的参数个数以形参的方式定义清楚：
 
